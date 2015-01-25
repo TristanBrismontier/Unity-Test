@@ -3,13 +3,6 @@ using System.Collections;
  
 public class PlayerControler : MonoBehaviour {
 	public float speed;
-	public GUIText countText;
-	private int count;
-
-	void Start(){
-		count = 0;
-		SetCountText ();
-	}
 
 	void FixedUpdate(){
 		float moveHorizontal = Input.GetAxis ("Horizontal");
@@ -20,14 +13,19 @@ public class PlayerControler : MonoBehaviour {
 
 	void OnTriggerEnter(Collider other){
 		if (other.gameObject.tag == "PickUp") {
-			other.gameObject.SetActive(false);
-			count++;
-			SetCountText();
+			Attach(other);
+			print("pick");
 		}
 	}
-
-	void SetCountText(){
-		countText.text = "Count : " + count.ToString();
+	
+	void Attach(Collider other)
+	{
+		if(other.gameObject.GetComponent("Rigidbody") != null)
+		{
+			Destroy(other.gameObject.rigidbody);
+			other.transform.parent = transform;
+			print("attach");
+		}
 	}
 
 }
