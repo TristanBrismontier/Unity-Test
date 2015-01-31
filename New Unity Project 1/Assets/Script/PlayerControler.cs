@@ -8,22 +8,22 @@ public class PlayerControler : MonoBehaviour {
 		float moveHorizontal = Input.GetAxis ("Horizontal");
 		float moveVertical = Input.GetAxis ("Vertical");
 		Vector3 movement = new Vector3 (moveHorizontal, 0.0f, moveVertical); 
-		rigidbody.AddForce (movement * speed * Time.deltaTime);
+		rigidbody.AddTorque(movement * speed * Time.deltaTime);
 	}
 
-	void OnTriggerEnter(Collider other){
-		if (other.gameObject.tag == "PickUp") {
-			Attach(other);
+	void OnCollisionEnter(Collision collision) {
+		if (collision.gameObject.tag == "PickUp") {
+			Attach(collision);
 			print("pick");
 		}
 	}
 	
-	void Attach(Collider other)
+	void Attach(Collision collision)
 	{
-		if(other.gameObject.GetComponent("Rigidbody") != null)
+		if(collision.gameObject.GetComponent("Rigidbody") != null)
 		{
-			Destroy(other.gameObject.rigidbody);
-			other.transform.parent = transform;
+			Destroy(collision.gameObject.rigidbody);
+			collision.transform.parent = transform;
 			print("attach");
 		}
 	}
