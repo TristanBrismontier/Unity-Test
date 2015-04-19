@@ -87,6 +87,7 @@ public class Playor : MovingObjects {
 	}
 	
 	private void Restart(){
+		GameManager.instance.savePlayerFood(food);
 		Application.LoadLevel (Application.loadedLevel);
 	}
 	

@@ -43,7 +43,9 @@ public class GameManager : MonoBehaviour {
 		InitGame ();
 
 	}
-
+	public void savePlayerFood(int food){
+		playerFoodPoints=food;
+	}
 	void InitGame() {
 		doingStetup = true;
 		levelImage = GameObject.Find ("LevelImage");

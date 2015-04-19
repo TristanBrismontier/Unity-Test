@@ -19,7 +19,12 @@ public class Player : MonoBehaviour {
 	private Rigidbody2D rb;
 	private bool canFire = true;
 
+
+	private Animator animator;
+	
+		
 	void Start() {
+		animator = GetComponent<Animator> ();	
 		rb = GetComponent<Rigidbody2D>();
 	}
 	
@@ -35,6 +40,7 @@ public class Player : MonoBehaviour {
 	}
 	
 	void Update() {
+		animator.SetBool("run",rb.velocity.x !=0);
 		if (Input.GetButton("Fire1") && canFire ){
 			canFire = false;
 			Instantiate(laser,shotSpawn.position,shotSpawn.rotation);
